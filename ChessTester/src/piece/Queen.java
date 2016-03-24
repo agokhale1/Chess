@@ -22,6 +22,7 @@ public class Queen extends Piece {
 	public boolean canMakeLegalMove(Position newPos)
 	{
 		
+		//TODO: maybe remove checkSquare in future
 		return Move.checkSquare(getPosition(), newPos) || Move.checkDiagonal(getPosition(), newPos) || Move.checkVertical(getPosition(), newPos) || Move.checkHorizontal(getPosition(), newPos);
 		
 //		if(newPos.checkValidPos())
