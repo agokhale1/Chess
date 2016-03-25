@@ -23,24 +23,26 @@ public class Knight extends Piece {
 	public boolean canMakeLegalMove(Position newPos)
 	{
 		
-		if(newPos.checkValidPos())
-		{
-			
-			if((newPos.getDistanceX(getPosition()) == 2 && newPos.getDistanceY(getPosition()) == 1) || (newPos.getDistanceX(getPosition()) == 1 && newPos.getDistanceY(getPosition()) == 2))
-			{
-				
-				if(Board.isBlankTile(newPos))
-					return true;
-				else
-					return false;
-				
-			}
-			else
-				return false;
-			
-		}
-		else
-			return false;
+		return Move.checkKnight(getPosition(), newPos);
+		
+//		if(newPos.checkValidPos())
+//		{
+//			
+//			if((newPos.getDistanceX(getPosition()) == 2 && newPos.getDistanceY(getPosition()) == 1) || (newPos.getDistanceX(getPosition()) == 1 && newPos.getDistanceY(getPosition()) == 2))
+//			{
+//				
+//				if(Board.isBlankTile(newPos))
+//					return true;
+//				else
+//					return false;
+//				
+//			}
+//			else
+//				return false;
+//			
+//		}
+//		else
+//			return false;
 		
 	}
 	

@@ -14,7 +14,7 @@ public class ChessTester {
 		
 		System.out.println("\n\n");
 		
-		Board.getBoard()[4][3].move(new Position(3, 2));
+		Board.getBoard()[4][4].move(new Position(6, 6));
 		b.printBoard();
 		
 	}

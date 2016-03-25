@@ -36,13 +36,22 @@ public class Board {
 //		board[7][6] = new Knight(Player.WHITE, new Position(7, 6));
 //		board[7][7] = new Rook(Player.WHITE, new Position(7, 7));
 		
-		board[4][3] = new Pawn(Player.WHITE, new Position(4, 3), false);
+		board[4][4] = new Bishop(Player.WHITE, new Position(4, 4));
+		board[2][2] = new Rook(Player.BLACK, new Position(2, 2));
+		board[6][6] = new Rook(Player.WHITE, new Position(6, 6));
+		board[6][2] = new Rook(Player.BLACK, new Position(6, 2));
+		board[2][6] = new Rook(Player.BLACK, new Position(2, 6));
 		
 	}
 	
 	public static Piece[][] getBoard()
 	{
 		return board;
+	}
+	
+	public static Piece getPiece(Position pos)
+	{
+		return board[pos.getX()][pos.getY()];
 	}
 	
 	public static boolean isBlankTile(Position pos)
@@ -70,4 +79,26 @@ public class Board {
 		
 	}
 	
+	public static String boardAsString()
+	{
+
+		String board = "";
+
+		for(Piece[] row : Board.getBoard())
+		{
+
+			for(Piece p : row)
+			{
+
+				if(p == null)
+					board += p + "     ";
+				else
+					board += p + "  ";
+
+			}
+			board += "\n";
+		}
+		return board;
+	}
+
 }
