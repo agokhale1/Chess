@@ -28,9 +28,17 @@ public class Move {
 	public static boolean checkDiagonal(Position oldPos, Position newPos)
 	{
 		
-		if(!newPos.checkValidPos() || !Board.isBlankTile(newPos)) return false;
+		if(!newPos.checkValidPos() || !Board.isBlankTile(newPos)) return false;		
 		if(newPos.getDistanceX(oldPos) != 0 && newPos.getDistanceY(oldPos) != 0 && newPos.getDistanceX(oldPos) == newPos.getDistanceY(oldPos))
-				return true;
+		{
+			//Checks if there is a piece between current and desired positions
+			for(int i = oldPos.getX() + 1, j = oldPos.getY() + 1; i < newPos.getX() && j < newPos.getY(); i++, j++)
+			{
+				if(!Board.isBlankTile(new Position(i, j)))
+					return false;
+			}
+			return true;
+		}
 		
 		return false;
 	}
@@ -40,7 +48,29 @@ public class Move {
 		
 		if(!newPos.checkValidPos() || !Board.isBlankTile(newPos)) return false;
 		if(newPos.getDistanceX(oldPos) == 0 && newPos.getDistanceY(oldPos) != 0)
+		{
+			//Checks for pieces between desired and current positions
+			if((oldPos.getY() > newPos.getY()))
+			{
+				for(int i = oldPos.getY() - 1; i > newPos.getY(); i--)
+					if(!Board.isBlankTile(new Position(oldPos.getX(), i)))
+						return false;
+			}
+			else if(oldPos.getY() < newPos.getY())
+			{
+				for(int i = oldPos.getY() + 1; i < newPos.getY(); i++)
+					if(!Board.isBlankTile(new Position(oldPos.getX(), i)))
+						return false;
+			}
+			//Capturing
+			if(!Board.isBlankTile(newPos))
+				if(Board.getPiece(newPos).getPlayer() != Board.getPiece(oldPos).getPlayer())
+					return true;
+				else 
+					return false;
+			
 			return true;
+		}
 		
 		return false;
 	}
@@ -50,6 +80,40 @@ public class Move {
 		
 		if(!newPos.checkValidPos() || !Board.isBlankTile(newPos)) return false;
 		if(newPos.getDistanceX(oldPos) != 0 && newPos.getDistanceY(oldPos) == 0)
+		{
+			//Checks for pieces between desired and current positions
+			if((oldPos.getX() > newPos.getX()))
+			{
+				for(int i = oldPos.getX() - 1; i > newPos.getX(); i--)
+					if(!Board.isBlankTile(new Position(i, oldPos.getY())))
+						return false;
+			}
+			else if(oldPos.getX() < newPos.getX())
+			{
+				for(int i = oldPos.getX() + 1; i < newPos.getX(); i++)
+					if(!Board.isBlankTile(new Position(i, oldPos.getY())))
+						return false;
+			}
+			//Capturing
+			if(!Board.isBlankTile(newPos))
+			{
+				System.out.print(Board.getPiece(newPos).getPlayer() + "  " + Board.getPiece(oldPos).getPlayer());
+				if(Board.getPiece(newPos).getPlayer() != Board.getPiece(oldPos).getPlayer())
+					return true;
+				else
+					return false;
+			}
+			return true;			
+		}
+		
+		return false;
+	}
+	
+	public static boolean checkKnight(Position oldPos, Position newPos)
+	{
+		
+		if(!newPos.checkValidPos() || !Board.isBlankTile(newPos)) return false;
+		if((newPos.getDistanceX(oldPos) == 1 && newPos.getDistanceY(oldPos) == 3) || (newPos.getDistanceX(oldPos) == 3 && newPos.getDistanceY(oldPos) == 1))
 			return true;
 		
 		return false;
