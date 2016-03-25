@@ -1,22 +1,44 @@
 package core;
 
-import handler.Position;
+import java.util.*;
+
+import handler.*;
+import piece.*;
 
 public class ChessTester {
 	
 	public static void main(String[] args)
 	{
 		
+		Scanner in = new Scanner(System.in);
 		Board b = new Board();
 		
 		b.initBoard();
 		b.printBoard();
 		
-		System.out.println("\n\n");
+		boolean gameRunning = true;
+		int x, y;
 		
-		Board.getBoard()[4][4].move(new Position(6, 6));
-		b.printBoard();
-		
+		while(gameRunning)
+		{
+			
+			System.out.print("Enter piece you wish to move: ");
+			x = in.nextInt();
+			y = in.nextInt();
+			
+			Piece p = Board.getBoard()[x][y];
+			
+			System.out.print("Enter the new position: ");
+			x = in.nextInt();
+			y = in.nextInt();
+			
+			p.move(new Position(x, y));
+			
+			System.out.println("\n");
+			b.printBoard();
+			
+		}
+		in.close();
 	}
 	
 }
